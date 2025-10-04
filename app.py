@@ -6,8 +6,6 @@ import os
 app = Flask(__name__)
 DB_FILE = "notes.db"
 
-init_db()  # ensures database + table are created
-
 # ---------------- DATABASE HELPERS ---------------- #
 def init_db():
     conn = sqlite3.connect(DB_FILE)
@@ -98,8 +96,13 @@ def delete_note(note_id):
     delete_note_db(note_id)
     return redirect(url_for("index"))
 
+# --------Startup ------- #
+# Make sure database and table exist on Render and locally
+init_db()
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
 
 
 
